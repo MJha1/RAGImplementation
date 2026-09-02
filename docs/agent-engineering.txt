@@ -1,0 +1,51 @@
+Agent Engineering: Harness, Loop, and Graph
+
+As language models move from answering single prompts to acting as agents — using
+tools, taking multiple steps, and working toward a goal — a new layer of
+engineering appears around the model itself. Three related disciplines are harness
+engineering, loop engineering, and graph engineering. Together they turn a raw
+model into a dependable system.
+
+Harness engineering:
+The harness is the software layer that wraps a language model and turns it into an
+agent. It assembles the prompt and context, describes the tools the model is
+allowed to use, executes the tool calls the model requests, enforces permissions
+and safety limits, and feeds the results back to the model. Harness engineering is
+the craft of designing this scaffolding: deciding what context to include and what
+to leave out, how clearly to describe each tool, how to surface errors so the model
+can recover, and how to represent the environment the agent is working in. A strong
+harness often matters more to real-world performance than the choice of model,
+because it controls what the model can see and do. Coding agents are a common
+example: the harness gives the model file access, a shell, and a way to read
+results.
+
+Loop engineering:
+An agent gets work done by looping. The model proposes an action, the harness
+executes it, the outcome is observed, and the model decides the next action — the
+cycle repeats until a stopping condition is met. Loop engineering is the design of
+this control loop. It answers questions such as: when should the loop stop, how do
+we detect that the agent is stuck or repeating itself, how do we fold in feedback
+or a verification step, and how do we manage the context that grows with every
+iteration. Techniques include setting iteration limits, adding reflection or
+self-check steps, summarizing or compacting earlier steps so the context window
+does not overflow, and defining clear success criteria. Good loop engineering keeps
+the agent making progress and prevents runaway or unproductive loops.
+
+Graph engineering:
+Instead of one free-form loop, a complex workflow can be modeled as a graph. Nodes
+represent steps or states — for example plan, retrieve, call a tool, or review —
+and edges represent the transitions between them, which can be conditional or run
+in parallel. Graph engineering is the design of this structure: defining the nodes,
+the branching logic, the cycles, and the checkpoints where state is saved.
+Expressing an agent as an explicit graph gives more control, observability, and
+reliability than an unstructured loop, and it makes multi-agent systems and
+deterministic workflows easier to build and debug. Frameworks such as LangGraph are
+built around this idea.
+
+How they fit together:
+The harness defines what the agent can see and do, the loop controls how it
+iterates toward a goal, and the graph gives that iteration an explicit structure.
+Simple agents may need only a harness and a basic loop; more demanding, reliable
+systems add a graph to orchestrate the steps. All three are about engineering the
+system around the model, not the model itself — which is where much of the
+real-world quality of an AI agent now comes from.

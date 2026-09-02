@@ -1,0 +1,25 @@
+Northwind Analytics — Product Overview
+
+Northwind Analytics is a cloud platform that helps product and operations teams
+turn raw event data into decisions. It ingests data from your app, warehouse,
+and third-party tools, then surfaces trends, funnels, and anomalies without
+requiring SQL.
+
+Plans and pricing:
+- Starter ($0/month): 1 project, up to 3 users, 30-day data retention, core
+  dashboards. Best for evaluation and small teams.
+- Growth ($199/month): unlimited projects, up to 25 users, 12-month retention,
+  funnel and retention analysis, Slack and email alerts.
+- Enterprise (custom pricing): unlimited users, 36-month retention, SSO/SAML,
+  role-based access control, a dedicated success manager, and a 99.9% uptime SLA.
+
+Key capabilities:
+- No-code funnels and retention curves.
+- Anomaly detection that flags unexpected drops or spikes in key metrics.
+- Cohort analysis to compare behavior across user segments.
+- Scheduled reports delivered to Slack or email.
+- A REST API and webhooks for exporting insights into other tools.
+
+Integrations include Segment, Snowflake, BigQuery, Amplitude, Salesforce, and
+a JavaScript SDK for web and mobile apps. Data typically appears in dashboards
+within two minutes of being received.

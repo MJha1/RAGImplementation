@@ -1,0 +1,6 @@
+# Core dependencies for this RAG app.
+# Install with:  .\venv\Scripts\python.exe -m pip install -r requirements.txt
+groq            # Groq API client - generates the answers
+chromadb        # Vector database + local embeddings (all-MiniLM-L6-v2)
+python-dotenv   # Loads GROQ_API_KEY from the .env file
+streamlit       # Simple web UI (app.py)

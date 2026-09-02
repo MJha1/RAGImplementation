@@ -1,0 +1,45 @@
+Large Language Models (LLMs), the Basics
+
+What is an LLM?
+A large language model is a neural network trained on vast amounts of text to
+predict the next token in a sequence. By learning these patterns, it can generate
+fluent text, answer questions, summarize, translate, and write code. Well-known
+families include GPT, Claude, Llama, and Gemini.
+
+Tokens:
+LLMs do not read words directly; they read tokens. A token is a chunk of text —
+often a word or part of a word. As a rough rule, one token is about four
+characters of English, and 100 tokens is roughly 75 words. Both the input and the
+output are measured in tokens, and pricing is usually per token.
+
+Context window:
+The context window is the maximum number of tokens a model can consider at once,
+including the prompt and the response. If a conversation or document exceeds the
+window, older content must be dropped or summarized. Modern models have context
+windows ranging from a few thousand to over a million tokens.
+
+Embeddings:
+An embedding is a numeric vector that represents the meaning of a piece of text.
+Similar meanings produce similar vectors. Embeddings power semantic search and are
+the foundation of retrieval-augmented generation. Note that generating embeddings
+is a different task from generating text, and some providers offer only one of the
+two.
+
+Temperature:
+Temperature controls randomness. A low temperature (near 0) makes the model
+choose the most likely tokens, giving focused, repeatable answers — good for
+factual tasks. A higher temperature adds variety and creativity, at the cost of
+consistency.
+
+Hallucination:
+A hallucination is when a model states something false or fabricated with
+confidence. It happens because the model predicts plausible text rather than
+looking up facts. Techniques to reduce hallucination include grounding the model
+with retrieved context (RAG), asking it to cite sources, lowering the temperature,
+and instructing it to say "I don't know" when unsure.
+
+Training vs. inference:
+Training is the expensive, one-time process of learning from data. Inference is
+using the trained model to answer a prompt. Fine-tuning further adapts a trained
+model to a narrower task or style, but for adding knowledge, RAG is usually
+cheaper and easier to keep up to date than fine-tuning.

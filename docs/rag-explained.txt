@@ -1,0 +1,44 @@
+Retrieval-Augmented Generation (RAG), Explained
+
+What is RAG?
+Retrieval-Augmented Generation is a technique that improves the answers of a
+large language model (LLM) by giving it relevant information retrieved from your
+own documents at question time. Instead of relying only on what the model learned
+during training, a RAG system looks up supporting passages and includes them in
+the prompt, so the answer is grounded in a specific, trusted source.
+
+The three steps:
+1. Retrieve — The user's question is converted into a numeric vector (an
+   embedding) and compared against a database of document chunks that were
+   embedded the same way. The most similar chunks are returned. This is called
+   semantic search: it matches on meaning, not just keywords.
+2. Augment — The retrieved chunks are inserted into the prompt as context,
+   usually with an instruction such as "answer using only the context below."
+3. Generate — The LLM writes an answer using that context and, ideally, cites
+   which documents it used.
+
+Why RAG matters:
+- Grounding reduces hallucination. Because the model is told to answer only from
+  the retrieved passages, it is far less likely to invent facts.
+- Freshness. You can update the documents without retraining the model.
+- Transparency. The system can show its sources, so answers are verifiable.
+- Cost. It is much cheaper than fine-tuning a model on your data.
+
+Chunking:
+Documents are split into smaller overlapping pieces called chunks before they are
+embedded. Smaller chunks make retrieval more precise; the overlap keeps ideas
+that span a boundary from being lost. Typical chunk sizes range from a few hundred
+to about a thousand characters.
+
+Embeddings and the vector store:
+An embedding model turns text into a list of numbers that captures its meaning.
+Texts with similar meaning have vectors that are close together. A vector database
+(such as ChromaDB, FAISS, or Pinecone) stores these vectors and finds the nearest
+matches quickly.
+
+Limitations:
+RAG can only answer from what is in the documents. If the answer is not present,
+a well-built RAG system should say it does not know rather than guess. Retrieval
+quality also matters: if the wrong chunks are retrieved, the answer will suffer,
+which is why chunking, embedding choice, and the number of retrieved results all
+need tuning.

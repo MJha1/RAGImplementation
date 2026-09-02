@@ -1,0 +1,43 @@
+Prompt Engineering, a Practical Guide
+
+What is prompt engineering?
+Prompt engineering is the practice of writing instructions that get reliable,
+high-quality results from a language model. Because a model responds to exactly
+what it is asked, small changes in wording can meaningfully change the output.
+
+System prompt vs. user prompt:
+- A system prompt sets the model's role, rules, and tone for the whole
+  conversation, for example "You are a concise financial analyst. Only use the
+  data provided." It is the place to put constraints you want applied every time.
+- A user prompt is the specific question or task for a single turn.
+Separating durable rules (system) from the immediate request (user) keeps behavior
+consistent.
+
+Core techniques:
+- Be specific. State the goal, the format, the audience, and any constraints.
+  "Summarize this in three bullet points for an executive" beats "summarize this."
+- Give examples (few-shot prompting). Showing one or two examples of the input and
+  the desired output teaches the model the pattern you want.
+- Ask for reasoning on hard problems (chain-of-thought). Inviting the model to work
+  step by step before answering improves accuracy on multi-step tasks.
+- Specify the output format. Ask for JSON, a table, or a fixed structure when you
+  need to parse or compare results.
+- Ground the model. Provide the source material and instruct it to answer only from
+  that material — the same idea used in retrieval-augmented generation.
+
+Reducing hallucination through prompting:
+Tell the model what to do when it lacks an answer, for example: "If the context does
+not contain the answer, say you don't know." Pair this with retrieved context and a
+low temperature for factual tasks.
+
+Common pitfalls:
+- Vague instructions lead to vague answers.
+- Overloading a single prompt with many unrelated tasks reduces quality; split them.
+- Assuming the model remembers earlier context beyond its context window.
+- Not testing prompts on varied inputs. Treat a prompt like code: iterate and
+  evaluate it against real examples.
+
+Iterate:
+Good prompts are rarely right on the first try. Draft, test on several inputs,
+observe the failures, and refine. Keeping a small set of test questions makes it
+easy to tell whether a change actually helped.

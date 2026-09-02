@@ -1,0 +1,34 @@
+Northwind Analytics — Security and Data Policy
+
+Encryption:
+All data is encrypted in transit using TLS 1.2 or higher and encrypted at rest
+using AES-256. Encryption keys are rotated on a regular schedule and managed
+through a dedicated key management service.
+
+Compliance:
+Northwind Analytics is SOC 2 Type II certified and GDPR compliant. A Data
+Processing Addendum (DPA) is available on request. Enterprise customers can
+request the latest audit report under NDA.
+
+Access control:
+The Enterprise plan supports SSO/SAML and role-based access control with four
+roles: Owner, Admin, Analyst, and Viewer. Access to production data is limited
+to authorized personnel and every access is logged.
+
+Data residency:
+Customers can choose to store data in the United States or the European Union.
+Data does not leave the selected region.
+
+Data retention and deletion:
+Retention depends on your plan: 30 days on Starter, 12 months on Growth, and
+36 months on Enterprise. You can request deletion of a user's data at any time
+to support GDPR "right to be forgotten" requests; deletions are completed within
+30 days.
+
+Reliability:
+The Enterprise plan includes a 99.9% uptime SLA. The platform runs across
+multiple availability zones, and encrypted backups are taken daily.
+
+Reporting a vulnerability:
+Security issues can be reported to the security team, which acknowledges reports
+within one business day and provides a remediation timeline after triage.
