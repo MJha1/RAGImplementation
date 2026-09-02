@@ -5,18 +5,25 @@ A large language model is a neural network trained on vast amounts of text to
 predict the next token in a sequence. By learning these patterns, it can generate
 fluent text, answer questions, summarize, translate, and write code. Well-known
 families include GPT, Claude, Llama, and Gemini.
+Example: Given the start "The sky is", the model predicts a likely next token such
+as "blue." It builds a whole answer by repeating this one-token-at-a-time
+prediction.
 
 Tokens:
 LLMs do not read words directly; they read tokens. A token is a chunk of text —
 often a word or part of a word. As a rough rule, one token is about four
 characters of English, and 100 tokens is roughly 75 words. Both the input and the
 output are measured in tokens, and pricing is usually per token.
+Example: The word "unbelievable" may split into three tokens: "un", "believ",
+"able." The sentence "LLMs are useful" is about four tokens.
 
 Context window:
 The context window is the maximum number of tokens a model can consider at once,
 including the prompt and the response. If a conversation or document exceeds the
 window, older content must be dropped or summarized. Modern models have context
 windows ranging from a few thousand to over a million tokens.
+Example: With an 8,000-token window, a 50-page report (roughly 25,000 tokens) will
+not fit at once — you must send a few pages at a time or summarize first.
 
 Embeddings:
 An embedding is a numeric vector that represents the meaning of a piece of text.
@@ -24,12 +31,17 @@ Similar meanings produce similar vectors. Embeddings power semantic search and a
 the foundation of retrieval-augmented generation. Note that generating embeddings
 is a different task from generating text, and some providers offer only one of the
 two.
+Example: "dog" and "puppy" produce nearby vectors; "dog" and "spreadsheet" produce
+distant ones. That closeness is what lets search find related text.
 
 Temperature:
 Temperature controls randomness. A low temperature (near 0) makes the model
 choose the most likely tokens, giving focused, repeatable answers — good for
 factual tasks. A higher temperature adds variety and creativity, at the cost of
 consistency.
+Example: At temperature 0, "Write a tagline for a coffee shop" might return the
+same safe line every time. At temperature 0.9, you get a different, more inventive
+tagline on each run.
 
 Hallucination:
 A hallucination is when a model states something false or fabricated with
@@ -37,9 +49,15 @@ confidence. It happens because the model predicts plausible text rather than
 looking up facts. Techniques to reduce hallucination include grounding the model
 with retrieved context (RAG), asking it to cite sources, lowering the temperature,
 and instructing it to say "I don't know" when unsure.
+Example: Asked for a citation it does not have, a model might invent a realistic-
+looking but non-existent book title and author. Grounding it with real sources
+prevents this.
 
 Training vs. inference:
 Training is the expensive, one-time process of learning from data. Inference is
 using the trained model to answer a prompt. Fine-tuning further adapts a trained
 model to a narrower task or style, but for adding knowledge, RAG is usually
 cheaper and easier to keep up to date than fine-tuning.
+Example: Training is like a student studying for years; inference is that student
+answering one exam question. RAG is handing them an open textbook for the exam
+instead of making them memorize a new subject.

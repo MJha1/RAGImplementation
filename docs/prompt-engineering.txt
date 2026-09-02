@@ -4,6 +4,9 @@ What is prompt engineering?
 Prompt engineering is the practice of writing instructions that get reliable,
 high-quality results from a language model. Because a model responds to exactly
 what it is asked, small changes in wording can meaningfully change the output.
+Example: "Write about dogs" gives a vague, rambling paragraph. "Write a 50-word
+paragraph for children explaining why dogs make good family pets" gives a focused,
+useful result.
 
 System prompt vs. user prompt:
 - A system prompt sets the model's role, rules, and tone for the whole
@@ -12,16 +15,25 @@ System prompt vs. user prompt:
 - A user prompt is the specific question or task for a single turn.
 Separating durable rules (system) from the immediate request (user) keeps behavior
 consistent.
+Example: System prompt: "You are a helpful assistant who always replies in one
+sentence." User prompt: "Explain gravity." The one-sentence rule applies no matter
+what the user asks next.
 
 Core techniques:
 - Be specific. State the goal, the format, the audience, and any constraints.
   "Summarize this in three bullet points for an executive" beats "summarize this."
 - Give examples (few-shot prompting). Showing one or two examples of the input and
   the desired output teaches the model the pattern you want.
+  Example: "Classify the sentiment. 'I love it' -> positive. 'This is terrible' ->
+  negative. 'The meeting is at 3pm' ->" and the model completes "neutral."
 - Ask for reasoning on hard problems (chain-of-thought). Inviting the model to work
   step by step before answering improves accuracy on multi-step tasks.
+  Example: Adding "Let's think step by step" before a word problem helps the model
+  reach the right number instead of guessing.
 - Specify the output format. Ask for JSON, a table, or a fixed structure when you
   need to parse or compare results.
+  Example: "Return only JSON like {\"sentiment\": \"positive\"}" makes the output
+  easy for a program to read.
 - Ground the model. Provide the source material and instruct it to answer only from
   that material — the same idea used in retrieval-augmented generation.
 
@@ -33,6 +45,8 @@ low temperature for factual tasks.
 Common pitfalls:
 - Vague instructions lead to vague answers.
 - Overloading a single prompt with many unrelated tasks reduces quality; split them.
+  Example: Asking one prompt to "translate this, summarize it, and fix the grammar"
+  often does all three poorly; three separate prompts do each one well.
 - Assuming the model remembers earlier context beyond its context window.
 - Not testing prompts on varied inputs. Treat a prompt like code: iterate and
   evaluate it against real examples.

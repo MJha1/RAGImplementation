@@ -7,11 +7,19 @@ own documents at question time. Instead of relying only on what the model learne
 during training, a RAG system looks up supporting passages and includes them in
 the prompt, so the answer is grounded in a specific, trusted source.
 
+Example: You ask a company chatbot, "How many vacation days do I get?" A plain LLM
+might guess a common number. A RAG system first finds the paragraph in the HR
+handbook that says "employees receive 20 days of paid leave per year," puts that
+paragraph in the prompt, and the model answers "20 days" — from your actual policy.
+
 The three steps:
 1. Retrieve — The user's question is converted into a numeric vector (an
    embedding) and compared against a database of document chunks that were
    embedded the same way. The most similar chunks are returned. This is called
    semantic search: it matches on meaning, not just keywords.
+   Example: The question "How do I reset my password?" can match a passage titled
+   "Changing your login credentials," even though it never uses the word
+   "password," because their meanings are close.
 2. Augment — The retrieved chunks are inserted into the prompt as context,
    usually with an instruction such as "answer using only the context below."
 3. Generate — The LLM writes an answer using that context and, ideally, cites
@@ -29,12 +37,18 @@ Documents are split into smaller overlapping pieces called chunks before they ar
 embedded. Smaller chunks make retrieval more precise; the overlap keeps ideas
 that span a boundary from being lost. Typical chunk sizes range from a few hundred
 to about a thousand characters.
+Example: A 2,000-character policy page split into chunks of 500 characters with
+100 characters of overlap becomes about five chunks, and a sentence that falls on
+a boundary still appears whole in one of them.
 
 Embeddings and the vector store:
 An embedding model turns text into a list of numbers that captures its meaning.
 Texts with similar meaning have vectors that are close together. A vector database
 (such as ChromaDB, FAISS, or Pinecone) stores these vectors and finds the nearest
 matches quickly.
+Example: The embeddings for "car" and "automobile" sit close together, while the
+embedding for "banana" sits far away — so a search for "car" returns the
+"automobile" passage, not the fruit one.
 
 Limitations:
 RAG can only answer from what is in the documents. If the answer is not present,
@@ -42,3 +56,6 @@ a well-built RAG system should say it does not know rather than guess. Retrieval
 quality also matters: if the wrong chunks are retrieved, the answer will suffer,
 which is why chunking, embedding choice, and the number of retrieved results all
 need tuning.
+Example: If you ask this app "What is the capital of France?" — a fact that is not
+in its documents — it answers "I don't know based on the provided documents"
+instead of guessing.

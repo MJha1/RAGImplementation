@@ -15,9 +15,10 @@ the craft of designing this scaffolding: deciding what context to include and wh
 to leave out, how clearly to describe each tool, how to surface errors so the model
 can recover, and how to represent the environment the agent is working in. A strong
 harness often matters more to real-world performance than the choice of model,
-because it controls what the model can see and do. Coding agents are a common
-example: the harness gives the model file access, a shell, and a way to read
-results.
+because it controls what the model can see and do.
+Example: A coding agent's harness offers tools like read_file, write_file, and
+run_tests. The model replies "call run_tests"; the harness actually runs the tests,
+captures the output, and hands it back so the model can decide what to fix next.
 
 Loop engineering:
 An agent gets work done by looping. The model proposes an action, the harness
@@ -28,8 +29,10 @@ we detect that the agent is stuck or repeating itself, how do we fold in feedbac
 or a verification step, and how do we manage the context that grows with every
 iteration. Techniques include setting iteration limits, adding reflection or
 self-check steps, summarizing or compacting earlier steps so the context window
-does not overflow, and defining clear success criteria. Good loop engineering keeps
-the agent making progress and prevents runaway or unproductive loops.
+does not overflow, and defining clear success criteria.
+Example: An agent fixing a bug loops: run the tests (they fail) -> edit the code ->
+run the tests again -> repeat. The loop stops when the tests pass, or after a limit
+of, say, 10 tries so it never runs forever.
 
 Graph engineering:
 Instead of one free-form loop, a complex workflow can be modeled as a graph. Nodes
@@ -41,6 +44,9 @@ Expressing an agent as an explicit graph gives more control, observability, and
 reliability than an unstructured loop, and it makes multi-agent systems and
 deterministic workflows easier to build and debug. Frameworks such as LangGraph are
 built around this idea.
+Example: A research agent as a graph: Plan -> Search -> Summarize -> Review. If the
+Review step decides the information is thin, its edge loops back to Search;
+otherwise it moves on to Write. Each box is a node and each arrow is an edge.
 
 How they fit together:
 The harness defines what the agent can see and do, the loop controls how it
@@ -49,3 +55,6 @@ Simple agents may need only a harness and a basic loop; more demanding, reliable
 systems add a graph to orchestrate the steps. All three are about engineering the
 system around the model, not the model itself — which is where much of the
 real-world quality of an AI agent now comes from.
+Example: A simple "answer my email" helper needs just a harness and a short loop.
+A system that researches a topic, drafts a report, checks it, and revises it is
+better built as a graph so each stage is controlled and repeatable.
